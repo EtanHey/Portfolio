@@ -89,7 +89,7 @@ function Feed(props: FeedProps) {
   }
   async function handleGetPostsList() {
     try {
-      const { data } = await axios.get(`/posts/get-posts-list`);
+      const { data } = await axios.get(`/api/posts/get-posts-list`);
       const currentUsersPostsList = data;
 
       // let halfArray: any = [];

@@ -69,6 +69,8 @@ export const loginUser = async (req, res) => {
     if (emailLookup) {
       let email = emailLookup.email;
       const verified = await User.findOne({ email: email, password: password });
+      console.log(verified, 'verified');
+      
       if (!verified) {
         let loginData = {
           message: `Welcome back ${emailLookup.username}, thats not the password`,
@@ -94,6 +96,7 @@ export const loginUser = async (req, res) => {
         const payload = { loginData };
         const encryptedInfo = jwt.encode(payload, secret);
         res.cookie("currentUserInfo", encryptedInfo, {});
+        
         res.send({ loginData });
         return;
       }

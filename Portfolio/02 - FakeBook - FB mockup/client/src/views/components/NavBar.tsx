@@ -174,13 +174,13 @@ function NavBar(props: NavBarProps) {
         throw new Error(`no search term in handle search result -search.tsx`);
       if (searchTerm) {
         //search for users
-        const { data } = await axios.post("/users/search-users", {
+        const { data } = await axios.post("/api/users/search-users", {
           searchTerm,
         });
         setUserResults(data);
 
         //search for posts
-        axios.post("/posts/search-posts", { searchTerm }).then((res) => {
+        axios.post("/api/posts/search-posts", { searchTerm }).then((res) => {
           setPostResults(res.data);
         });
       }

@@ -27,10 +27,10 @@ mongoose
 
 
 import userRoutes from "./routes/userRoutes";
-app.use("/users", userRoutes);
+app.use("/api/users", userRoutes);
 
 import postRoutes from "./routes/postsRoutes";
-app.use("/posts", postRoutes);
+app.use("/api/posts", postRoutes);
 
 
 app.listen(port, () => {

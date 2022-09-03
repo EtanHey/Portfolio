@@ -76,7 +76,7 @@ function RegisterForm(props: RegisterFormProps) {
       // if (password !== confirmPassword)
       //   setRegisterWarning("*Passwords dont match");
       // setTimeout(() => setRegisterWarning(""), 5000);
-      const { data } = await axios.post("/users/add-new-user", {
+      const { data } = await axios.post("/api/users/add-new-user", {
         firstName,
         lastName,
         email,

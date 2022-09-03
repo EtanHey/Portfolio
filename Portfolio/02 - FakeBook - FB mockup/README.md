@@ -4,6 +4,6 @@ JWT_SECRET={your own string}
 
 ENV = production
 
-PORT=4002
+PORT=4001
 
 MONGODB_URI={your mongoDB connection link}
