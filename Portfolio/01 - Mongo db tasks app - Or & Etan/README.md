@@ -6,6 +6,8 @@ open .env file, with:
 
 2)MONGODB_URI={your mongoDB connection link};
 
+open public -> index.html
+
 turn on live server, sign up.
 
 log in.
