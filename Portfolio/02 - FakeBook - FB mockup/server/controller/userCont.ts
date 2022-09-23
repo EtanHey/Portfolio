@@ -69,7 +69,6 @@ export const loginUser = async (req, res) => {
     if (emailLookup) {
       let email = emailLookup.email;
       const verified = await User.findOne({ email: email, password: password });
-      console.log(verified, 'verified');
       
       if (!verified) {
         let loginData = {

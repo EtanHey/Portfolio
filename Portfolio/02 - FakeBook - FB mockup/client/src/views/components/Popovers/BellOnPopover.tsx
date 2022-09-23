@@ -20,8 +20,6 @@ import {
 } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function calcWidth(vw:any, less:any){
-  console.log(parseInt(vw) - parseInt(less));
-  
 return parseInt(vw) - parseInt(less)
 }
 interface BellOnPopoverProps {

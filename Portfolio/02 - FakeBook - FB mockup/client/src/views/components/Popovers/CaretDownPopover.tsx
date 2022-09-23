@@ -43,7 +43,6 @@ function CaretDownPopover(props: CaretDownPopoverProps) {
   } = props;
   function handleClosePopover() {
     setArrowAnchor(null);
-    console.log('arrowanchor down', ArrowAnchor);
     
     if (PopoverButton) {
       PopoverButton.style.backgroundColor = "#e3e6ea";

@@ -137,10 +137,6 @@ function HomePage(props: HomePageProps) {
     }
   }, []);
 
-  useEffect(() => {
-    console.log(postsList);
-  });
-
   const appStyling = {
     background: background.default,
     color: primary.contrastText,

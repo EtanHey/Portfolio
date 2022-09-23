@@ -12,6 +12,8 @@ export const login = async (req, res) => {
     if (!isAUser)
       throw new Error("this user does not exist, create an account");
     const verified = await User.findOne({ email, password });
+    console.log(email, password);
+    
     if (!verified) throw new Error("this is the wrong password");
     const userPublicInfo = {
       firstName: verified.firstName,

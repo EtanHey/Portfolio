@@ -95,7 +95,6 @@ function FeedSk(props: FeedSkProps) {
   }
   async function handleGetOthersPostsList() {
     try {
-      console.log(profileId);
       const { data } = await axios.post(`/api/posts/get-others-posts-list`, {profileId});
       const otherUsersPostsList = data;
 

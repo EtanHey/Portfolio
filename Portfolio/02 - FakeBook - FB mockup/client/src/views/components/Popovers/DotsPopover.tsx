@@ -43,7 +43,6 @@ function MessagesPopover(props: DotsPopoverProps) {
   } = props;
   function handleClosePopover() {
     setDotsAnchor(null);
-    console.log('dotsAnchor down', dotsAnchor);
     
     if (PopoverButton) {
       PopoverButton.style.backgroundColor = "#e3e6ea";

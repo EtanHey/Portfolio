@@ -271,10 +271,6 @@ function NavBar(props: NavBarProps) {
     mounted ? setSearchToggle(false) : setSearchToggle(true);
   }, [mounted]);
 
-  useEffect(() => {
-    console.log(hasWindow, "hasloaded");
-    console.log(usersPersonalInfo, "UsersPersonalInfo");
-  }, []);
 
   return (
     <AppBar className="NavBar" position="fixed" color="secondary">

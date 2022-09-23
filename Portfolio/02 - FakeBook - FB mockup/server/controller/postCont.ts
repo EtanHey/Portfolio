@@ -23,14 +23,14 @@ export const getOthersPostsList = async (req, res) => {
   try {
     const data = req.body;
     const { profileId } = data;
-    console.log(profileId);
+
 
     const rest = req.cookies["currentUserInfo"];
     const userInfo = jwt.decode(rest, secret);
     const userId = userInfo.loginData.result._id;
     if (userId) {
       let otherUsersPostsList = await Post.find({ ownerId: profileId });
-      console.log(otherUsersPostsList);
+
 
       res.send(otherUsersPostsList);
       // const decoded = jwt.decode(userId, secret)
@@ -47,7 +47,7 @@ export const createNewPost = async (req, res) => {
   try {
     const rest = req.cookies["currentUserInfo"];
     const cookies = jwt.decode(rest, secret);
-    console.log(cookies);
+
 
     const newPostInfo = req.body;
     const newPostOwnerInfo = jwt.decode(req.cookies["currentUserInfo"], secret)

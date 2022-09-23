@@ -48,8 +48,7 @@ function Search(props: SearchProps) {
   function handleCloseSearchDrawer(ev: any) {
     const button = ev.currentTarget.firstChild;
     const icon = ev.currentTarget;
-    console.log(button);
-    console.log(icon);
+
 
     setSearchToggle(!SearchToggle);
 
@@ -83,7 +82,6 @@ function Search(props: SearchProps) {
       setSearchMenuToggle(true);
     } else {
       setSearchMenuToggle(false);
-      // console.log(searchTerm.length);
     }
   }, [searchTerm]);
   return (
