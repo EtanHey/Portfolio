@@ -1,4 +1,4 @@
-import React, {useDeferredValue, useEffect, Suspense} from 'react';
+import {useDeferredValue} from 'react';
 import ArticleCard from './ArticleCard';
 import ArticleSearch from './ArticleSearch';
 import {UserInfo} from '../../AnimatedRoutes';
@@ -9,7 +9,7 @@ interface AllArticlesProps {
     handleSearchTerm: Function;
     currentUser?: UserInfo;
     loginUserId?: String;
-    handleUpdateArticle:Function;
+    handleUpdateArticle: Function;
     handleDeleteArticle: Function;
 }
 
@@ -36,10 +36,9 @@ function AllArticles(props: AllArticlesProps) {
                 deferredArticles.map((article: ArticleInfoParams, index: number) => {
                     return <ArticleCard key={index} handleUpdateArticle={handleUpdateArticle} handleDeleteArticle={handleDeleteArticle} article={article} handleSetSingleArticle={handleSetSingleArticle} currentUser={currentUser} loginUserId={loginUserId} />;
                 })
-                ) : (
-                    <p>Loading......</p>
-                    )}
-
+            ) : (
+                <p>Loading......</p>
+            )}
         </ul>
     );
 }

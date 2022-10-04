@@ -70,7 +70,7 @@ function NewPostForm(props: NewPostFormProps) {
       ev.target.reset();
       let { data } = await axios.post("/api/posts/create-new-post", newPostInfo);
       const { newPost } = data;
-
+      
       if (newPost) {
         handleGetPostsList();
       }

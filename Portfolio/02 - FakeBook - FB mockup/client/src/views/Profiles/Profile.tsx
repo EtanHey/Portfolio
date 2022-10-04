@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { CssBaseline } from "@mui/material";
 import { motion } from "framer-motion";
 import { useParams, useNavigate } from "react-router-dom";
-import FeedSk from "../components/FeedSk";
 
 // new posts must
 interface PostInfoProps {
@@ -63,23 +62,11 @@ function Profile(props: ProfileProps) {
       <div className="wrapper_profile">
         <div className="wrapper_profile-left">
           <p>
-            'not yours!'
+            not yours!
           </p>
         </div>
       </div>
-      <FeedSk
-      profileId={profileId}
-        userId={profileId}
-        loggedIn={loggedIn}
-        setOthersPostsList={setOthersPostsList}
-    othersPostsList={othersPostsList}
-        usersPersonalInfo={usersPersonalInfo}
-        setPostsList={setPostsList}
-        postsList={postsList}
-        theme={theme}
-        lightTheme={lightTheme}
-        darkTheme={darkTheme}
-      />
+      
     </motion.div>
   );
 }

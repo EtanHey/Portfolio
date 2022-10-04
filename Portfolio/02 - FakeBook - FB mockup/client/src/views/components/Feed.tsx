@@ -3,31 +3,8 @@ import { useState, useEffect, useTransition } from "react";
 import axios from "axios";
 //styling imports:
 //mui components ->
-import {
-  Button,
-  TextField,
-  FormGroup,
-  AppBar,
-  Typography,
-  FormControl,
-  Collapse,
-  Container,
-  CssBaseline,
-  Stack,
-  Switch,
-  FormControlLabel,
-  Toolbar,
-  CardHeader,
-  Avatar,
-} from "@mui/material";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { grey, red, green, blue, purple, common } from "@mui/material/colors";
-import { Delete, DriveFileRenameOutline, Send } from "@mui/icons-material";
-//site logo import:
-import { ReactComponent as Logo } from "../styles/FakeBook.svg";
 //local components imports:
 import Post from "./Post";
-import PostSk from "./PostSk";
 import NewPostForm from "./NewPostForm";
 
 // new posts must
@@ -81,7 +58,6 @@ function Feed(props: FeedProps) {
     loggedIn,
     userId,
   } = props;
-  const [isPending, startTransition] = useTransition();
   if (theme) {
     var { primary, secondary, background } = lightTheme.palette;
   } else {
@@ -91,18 +67,12 @@ function Feed(props: FeedProps) {
     try {
       const { data } = await axios.get(`/api/posts/get-posts-list`);
       const currentUsersPostsList = data;
-
-      // let halfArray: any = [];
-      // for (let i = 0; i < 100; i++) {
-      //   halfArray.push(currentUsersPostsList[i]);
-      // }
       setPostsList(currentUsersPostsList);
     } catch (error) {
       console.log(error);
     }
   }
 
-  // useEffect(() => {}, [usersPersonalInfo]);
   useEffect(() => {
     if (loggedIn) {
       handleGetPostsList();
@@ -118,20 +88,21 @@ function Feed(props: FeedProps) {
         usersPersonalInfo={usersPersonalInfo}
         userId={userId}
         handleGetPostsList={handleGetPostsList}
-      />
+        />
       <div className="wrapper_post-root">
         {postsList.map((post: PostInfoProps, i) => {
           return (
             <Post
-              key={i}
-              setPostsList={setPostsList}
-              post={post}
-              theme={theme}
-              lightTheme={lightTheme}
-              darkTheme={darkTheme}
+            key={i}
+            setPostsList={setPostsList}
+            post={post}
+            theme={theme}
+            lightTheme={lightTheme}
+            darkTheme={darkTheme}
+            handleGetPostsList={handleGetPostsList}
             />
           );
-        })}
+        }).reverse()}
       </div>
     </div>
   );

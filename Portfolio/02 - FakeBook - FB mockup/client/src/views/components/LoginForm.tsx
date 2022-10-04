@@ -12,6 +12,7 @@ import {
   Typography,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { Cookies } from "react-cookie";
 
 //receiving props:
 interface LoginFormProps {
@@ -49,7 +50,21 @@ function LoginForm(props: LoginFormProps) {
   } else {
     var { primary, secondary, background, divider } = lightTheme.palette;
   }
+async function checkLogin(){
+try {
+	const {data} = await axios.get('/api/users/is-user-logged-in')
+  const {currentUser, ok} = data;
+  if(ok) {    
+    setUsersPersonalInfo(currentUser);
+        setLoggedIn(true);
+        setUserId(currentUser._id);
+        
+  }
 
+} catch (error) {
+	console.log(error)
+}
+}
   async function handleLogin(ev: any) {
     ev.preventDefault();
     try {
@@ -64,7 +79,6 @@ function LoginForm(props: LoginFormProps) {
         username,
         password,
       };
-
       
       const { data } = await axios.post("/api/users/login-user", userData);
 
@@ -77,11 +91,10 @@ function LoginForm(props: LoginFormProps) {
           setLoginWarning("");
         }, 5000);
       } else {
-        const { result } = loginData;
         const currentUsersPersonalInfo = loginData.verifiedUserPersonalInfo;
         setUsersPersonalInfo(currentUsersPersonalInfo);
         setLoggedIn(true);
-        setUserId(result._id);
+        setUserId(currentUsersPersonalInfo.id);
       }
     } catch (error) {
       console.log(error);
@@ -92,6 +105,7 @@ function LoginForm(props: LoginFormProps) {
     if (loggedIn) {
       navigate("/HomePage");
     }
+    return ()=>{checkLogin()}
   }, [userId]);
 
   return (

@@ -5,8 +5,6 @@
         flex-direction: column;
         place-items: center;
         place-content: flex-start;
-        // min-height: 30vh;
-        // max-height: 50vh;
         width: 100%;
 
         &-triggerButton {
@@ -29,8 +27,6 @@
     &-allUsers {
         position: relative;
         gap: 1em;
-        // width: 100%;
-        // max-width: 100%;
         overflow-x: scroll;
     }
 
@@ -44,9 +40,7 @@
         display: flex;
         flex-direction: column;
         width: 40vw;
-        // max-height: 20vh;
     }
-    //allUsers is the list parent of userCard list item
     &-userCard {
         font-size: clamp(0.5em, 2vh, 1em);
         padding-block-end: 1em;
@@ -61,7 +55,6 @@
             display: flex;
             place-items: space-between;
             place-content: space-between;
-            // flex-direction: column;
         }
 
         &-professional {
@@ -75,7 +68,6 @@
         list-style: none;
         display: flex;
         flex-direction: column;
-        // overflow: none;
         max-width: 40vw;
         width: 40vw;
         max-height: 20vh;
@@ -88,45 +80,27 @@
                 text-align: start;
                 cursor: pointer;
                 align-self: flex-start;
-                &-personal {
-                }
-                &-professional {
-                }
-            }
-            &-update {
-                &Button {
-                }
-                &Form {
-                }
             }
         }
         &-content {
-            // padding-right: 40vw;
-            // max-width: 40vw;
-            text-overflow: ellipsis;
+            overflow-y: hidden;
             white-space: nowrap;
             min-height: 30vh;
-            max-width: 40vw;
-            text-align:start;
-            // width: min-content;
-            &Title {
+            width: 40vw;
+            text-align: start;
 
+            &Title {
                 white-space: nowrap;
-                overflow: hidden !important;
+                overflow: hidden;
                 text-overflow: ellipsis;
-                width: 35ch;
+                width: 30vw;
             }
             &Preview {
-                width: 70ch;
+                max-width: 30vw;
                 display: inline-block;
-        white-space: nowrap;
-        overflow: hidden !important;
-        text-overflow: ellipsis;
-                // height: 1.2em;
-                // max-width: 40vw;
-                // text-overflow: ellipsis;
-                // white-space: nowrap;
-                // overflow: hidden;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
         }
     }

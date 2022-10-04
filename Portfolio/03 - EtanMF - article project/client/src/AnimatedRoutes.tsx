@@ -1,5 +1,5 @@
 import {Routes, Route, useNavigate} from 'react-router-dom';
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import {AnimatePresence} from 'framer-motion';
 import HomePage from './views/Pages/HomePage';
 import Login from './views/Pages/Login';
@@ -29,7 +29,6 @@ export interface ArticleInfoParams {
 
 function AnimatedRoutes() {
     const navigate = useNavigate();
-    const [mounted, setMounted] = useState(false);
     const [userList, setUserList] = useState<Array<UserInfo>>([]);
     const [currentUser, setCurrentUser] = useState<UserInfo>();
     const [articleList, setArticleList] = useState<Array<ArticleInfoParams>>([]);
@@ -120,7 +119,6 @@ function AnimatedRoutes() {
     async function handleCreateNewArticle(e: any) {
         try {
             e.preventDefault();
-
             const title = e.target.newArticleTitle.value;
             const content = e.target.newArticleContent.value;
 
@@ -128,9 +126,7 @@ function AnimatedRoutes() {
                 title,
                 content,
             });
-
             if (!data.error) {
-                // e.target.reset();
                 getAllArticles();
             }
         } catch (error) {
@@ -165,7 +161,6 @@ function AnimatedRoutes() {
     const filteredArticleList = handleSearchArticles(articleSearchTerm);
 
     function handleSearchTerm(e: any) {
-        // console.log(e.target.value.toLowerCase(), "setter");
         setArticleSearchTerm(e.target.value);
     }
 
@@ -175,23 +170,20 @@ function AnimatedRoutes() {
             let {updateArticleTitle, updateArticleContent} = ev.target.elements;
             updateArticleTitle = updateArticleTitle.value;
             updateArticleContent = updateArticleContent.value;
-            const {data} = await axios.put('/api/articles/update-article', {updateArticleTitle, updateArticleContent, articleId});
-            getAllArticles(loginUserId)
+            const {data} = await axios.patch('/api/articles/update-article', {updateArticleTitle, updateArticleContent, articleId});
+            getAllArticles(loginUserId);
         } catch (error) {
             console.log(error);
         }
     }
-async function handleDeleteArticle(ownerId: string, articleId: string){
-    try {
-        const {data} = await axios.post('/api/articles/delete-article', { ownerId: ownerId, articleId: articleId})
-
-getAllArticles(loginUserId)
-
-         
-    } catch (error) {
-        console.log(error);
+    async function handleDeleteArticle(ownerId: string, articleId: string) {
+        try {
+            const {data} = await axios.delete('/api/articles/delete-article', {data:{ownerId: ownerId, articleId: articleId}});
+            getAllArticles(loginUserId);
+        } catch (error) {
+            console.log(error);
+        }
     }
-}
     return (
         <AnimatePresence>
             <Routes>

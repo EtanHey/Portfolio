@@ -271,6 +271,7 @@ function NavBar(props: NavBarProps) {
     mounted ? setSearchToggle(false) : setSearchToggle(true);
   }, [mounted]);
 
+  
 
   return (
     <AppBar className="NavBar" position="fixed" color="secondary">

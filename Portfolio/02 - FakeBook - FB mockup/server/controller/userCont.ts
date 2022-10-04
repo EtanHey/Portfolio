@@ -81,9 +81,10 @@ export const loginUser = async (req, res) => {
         const verifiedUserPersonalInfo = {
           firstName: verified.firstName,
           lastName: verified.lastName,
+          id: verified._id,
           ok: true,
         };
-
+        
         const result = verified;
         let loginData = {
           result: result,
@@ -124,3 +125,25 @@ export const searchUsers = async (req, res) => {
     res.send({ error: error.message });
   }
 };
+
+export const isUserLoggedIn = async (req, res) =>{
+  try {
+    const cookie = req.cookies.currentUserInfo;
+    if(!cookie) {
+      res.send({ok:false})
+      return;
+    }
+    const currentUserInfo = jwt.decode(cookie,secret).loginData.verifiedUserPersonalInfo
+    
+    const currentUser = await User.findById(currentUserInfo.id, {password: 0})
+    if(!currentUser) {
+      res.send({ok:false, message: 'no user was found using your cookies'})
+      return;
+    }
+    res.send({currentUser,ok:true})
+    
+  } catch (error) {
+    console.log(error.message);
+    res.send({error:error.message})
+  }
+}

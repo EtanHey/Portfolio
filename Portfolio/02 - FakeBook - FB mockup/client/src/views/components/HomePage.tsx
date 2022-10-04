@@ -5,44 +5,18 @@ import { useState, useEffect, useTransition } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies, Cookies } from "react-cookie";
 import { motion } from "framer-motion";
-import express from "express";
-import mongoose from "mongoose";
-import axios from "axios";
+
 //styling imports:
 //mui ->
 import {
-  Button,
-  TextField,
-  FormGroup,
-  AppBar,
-  Card,
-  CardContent,
-  CardActions,
-  CardMedia,
-  Grid,
-  Typography,
-  FormControl,
-  Collapse,
-  Container,
+ 
   CssBaseline,
-  Stack,
-  FormControlLabel,
-  Toolbar,
-  CardHeader,
-  Avatar,
+
 } from "@mui/material";
-import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
-import { grey, red, green, blue, purple, common } from "@mui/material/colors";
-import { Delete, DriveFileRenameOutline, Send } from "@mui/icons-material";
-// web logo import:
-import { ReactComponent as Logo } from "./views/styles/FakeBook.svg";
+
 //local components imports:
 import Feed from "./Feed";
-import Post from "./Post";
-import NavBar from "./NavBar";
-import NewPostForm from "./NewPostForm";
-import FeedSk from "./FeedSk";
-import LoginPage from "./LoginPage";
+
 import "../styles/global.scss";
 
 //receiving props:

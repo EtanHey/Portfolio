@@ -6,9 +6,9 @@ open .env file, with:
 
 2)MONGODB_URI={your mongoDB connection link};
 
-open public -> index.html
+turn on live server, and head over to: `http://localhost:3000/`
 
-turn on live server, sign up.
+sign up.
 
 log in.
 
@@ -18,5 +18,4 @@ you can mark them as done by tapping the check mark and undone by tapping it aga
 
 edit by tapping the paper and pen icon on the right of the name of the task, and delete by tapping the trash icon.
 
-then in home page (get there by tapping the hamburger icon on the top right and tapping home), you can see all your need to do tasks.
-done tasks aren't visible there.
+then in home page (get there by tapping the hamburger icon on the top right and tapping home), you can see all your need to do tasks. done tasks aren't visible there.

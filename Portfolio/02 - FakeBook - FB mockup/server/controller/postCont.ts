@@ -24,13 +24,11 @@ export const getOthersPostsList = async (req, res) => {
     const data = req.body;
     const { profileId } = data;
 
-
     const rest = req.cookies["currentUserInfo"];
     const userInfo = jwt.decode(rest, secret);
     const userId = userInfo.loginData.result._id;
     if (userId) {
       let otherUsersPostsList = await Post.find({ ownerId: profileId });
-
 
       res.send(otherUsersPostsList);
       // const decoded = jwt.decode(userId, secret)
@@ -47,7 +45,6 @@ export const createNewPost = async (req, res) => {
   try {
     const rest = req.cookies["currentUserInfo"];
     const cookies = jwt.decode(rest, secret);
-
 
     const newPostInfo = req.body;
     const newPostOwnerInfo = jwt.decode(req.cookies["currentUserInfo"], secret)
@@ -97,3 +94,20 @@ export const searchPosts = async (req, res) => {
     res.send({ error: error.message });
   }
 };
+
+export const deletePost = async(req,res)=>{
+try {
+
+  
+  const postId = req.body._id;
+  const {deletedCount} = await Post.deleteOne({_id:postId})
+if(deletedCount === 1) {
+  res.send({ok:true})
+  return
+}
+} catch (error) {
+  console.log(error);
+  res.send({error:error.message})
+  
+}
+}

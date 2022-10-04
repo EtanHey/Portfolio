@@ -1,13 +1,12 @@
 import {useEffect, useTransition} from 'react';
-import {Outlet, useLocation, Link} from 'react-router-dom';
+import {Outlet} from 'react-router-dom';
 import {motion} from 'framer-motion';
-import {createBrowserHistory} from 'history';
+
 import NewArticle from '../Components/NewArticle';
 import AllUsers from '../Components/AllUsers';
 import Back from '../Components/Back';
 import AllArticles from '../Components/AllArticles';
 import {ArticleInfoParams} from '../../AnimatedRoutes';
-import ArticleSearch from '../Components/ArticleSearch';
 
 interface HomePageProps {
     handleGetUsers: Function;
@@ -42,15 +41,9 @@ function HomePage(props: HomePageProps) {
         return () => {};
     }, []);
     return (
-        <motion.div
-            className='wrapper'
-            initial={{opacity: 0}}
-            animate={{opacity: 1}}
-            // transition={{ duration: 2 }}
-        >
+        <motion.div className='wrapper' initial={{opacity: 0}} animate={{opacity: 1}} transition={{duration: 2}}>
             <div className='wrapper__HomePage'>
                 <Back />
-                {/* <ArticleSearch /> */}
                 <NewArticle handleCreateNewArticle={handleCreateNewArticle} />
                 {isPending && <p>loading...</p>}
                 <div className='wrapper__HomePage-lists'>

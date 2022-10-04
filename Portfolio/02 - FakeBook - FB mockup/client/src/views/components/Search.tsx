@@ -49,7 +49,6 @@ function Search(props: SearchProps) {
     const button = ev.currentTarget.firstChild;
     const icon = ev.currentTarget;
 
-
     setSearchToggle(!SearchToggle);
 
     // setSearchToggle(true);
@@ -82,6 +81,7 @@ function Search(props: SearchProps) {
       setSearchMenuToggle(true);
     } else {
       setSearchMenuToggle(false);
+      // console.log(searchTerm.length);
     }
   }, [searchTerm]);
   return (

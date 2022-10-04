@@ -1,5 +1,3 @@
-import {useId} from 'react';
-import {Link} from 'react-router-dom';
 import {motion} from 'framer-motion';
 
 interface LoginProps {
@@ -9,7 +7,7 @@ interface LoginProps {
 
 function Login(props: LoginProps) {
     const {handleLogin, handleCreate} = props;
-    const id = useId();
+
     return (
         <motion.div className='wrapper' initial={{opacity: 0}} animate={{opacity: 1}} transition={{duration: 2}}>
             <h1 className='wrapper__Login-title'>BlogPosts</h1>

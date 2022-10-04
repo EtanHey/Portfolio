@@ -50,11 +50,12 @@ interface PostsProps {
   theme: any;
   lightTheme: any;
   darkTheme: any;
+  handleGetPostsList: Function;
 }
 
 function Post(props: PostsProps) {
   const navigate = useNavigate();
-  const { setPostsList, post, theme, lightTheme, darkTheme } = props;
+  const { setPostsList, post, theme, lightTheme, darkTheme, handleGetPostsList } = props;
   const Initials =
     post.ownerFirstName.charAt(0).toUpperCase() +
     post.ownerLastName.charAt(0).toUpperCase();
@@ -67,13 +68,20 @@ function Post(props: PostsProps) {
 
   function handleOpenPostOwnersProfile(ev: any) {
     // navigate(`/HomePage/Profile/${userId}`);
-
     
   }
 
-
-  function handleDeletePost(ev: any) {
-    console.log(post, "post");
+  async function handleDeletePost(id:string) {
+    try {
+      const {data} = await axios.post('/api/posts/delete-post', {_id:id})
+      const {ok} = data;
+      if(ok){
+        handleGetPostsList();
+      }
+      
+      } catch (error) {
+        console.log(error);
+      }
   }
   return (
     <Card
@@ -94,26 +102,26 @@ function Post(props: PostsProps) {
         color={primary.contrastText}
         style={{ textAlign: "left" }}
         avatar={
-          <Avatar onClick={handleOpenPostOwnersProfile}
+          <Link className="post__posterName" to={`/HomePage/Profile/${post.ownerId}`}><Avatar onClick={handleOpenPostOwnersProfile}
             sx={{
               color: theme ? primary.contrastText : primary.main,
               bgcolor: theme ? primary.dark : secondary.main,
             }}
           >
             {Initials}
-          </Avatar>
+          </Avatar></Link>
         }
         title={
-          <Link to={`/HomePage/Profile/${post.ownerId}`} onClick={handleOpenPostOwnersProfile}>
-            `{post.ownerFirstName} {post.ownerLastName}`
+          <Link className="post__posterName" to={`/HomePage/Profile/${post.ownerId}`} onClick={handleOpenPostOwnersProfile}>
+          <h2>  {post.ownerFirstName} {post.ownerLastName}</h2>
           </Link>
         }
         subheader={<Typography color="primary">{post.time}</Typography>}
         action={
           <Button
             color="primary"
-            onClick={(ev: any) => {
-              handleDeletePost(ev);
+            onClick={() => {
+              handleDeletePost(post._id);
             }}
           >
             <FontAwesomeIcon size="xs" icon={["fas", "trash"]} />
