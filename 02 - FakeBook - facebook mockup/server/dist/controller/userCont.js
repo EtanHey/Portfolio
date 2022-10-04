@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.searchUsers = exports.loginUser = exports.addUser = void 0;
+exports.isUserLoggedIn = exports.searchUsers = exports.loginUser = exports.addUser = void 0;
 const userModel_1 = __importDefault(require("../model/userModel"));
 const jwt_simple_1 = __importDefault(require("jwt-simple"));
 const secret = process.env.JWT_SECRET;
@@ -89,6 +89,7 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 const verifiedUserPersonalInfo = {
                     firstName: verified.firstName,
                     lastName: verified.lastName,
+                    id: verified._id,
                     ok: true,
                 };
                 const result = verified;
@@ -130,4 +131,25 @@ const searchUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.searchUsers = searchUsers;
+const isUserLoggedIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const cookie = req.cookies.currentUserInfo;
+        if (!cookie) {
+            res.send({ ok: false });
+            return;
+        }
+        const currentUserInfo = jwt_simple_1.default.decode(cookie, secret).loginData.verifiedUserPersonalInfo;
+        const currentUser = yield userModel_1.default.findById(currentUserInfo.id, { password: 0 });
+        if (!currentUser) {
+            res.send({ ok: false, message: 'no user was found using your cookies' });
+            return;
+        }
+        res.send({ currentUser, ok: true });
+    }
+    catch (error) {
+        console.log(error.message);
+        res.send({ error: error.message });
+    }
+});
+exports.isUserLoggedIn = isUserLoggedIn;
 //# sourceMappingURL=userCont.js.map

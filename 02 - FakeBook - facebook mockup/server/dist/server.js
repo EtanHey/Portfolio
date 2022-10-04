@@ -21,9 +21,9 @@ mongoose_1.default
     console.log("Failed to connect to Mongoose:");
     console.log(err.message);
 });
-const userRoutes_1 = __importDefault(require("./server/routes/userRoutes"));
+const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 app.use("/api/users", userRoutes_1.default);
-const postsRoutes_1 = __importDefault(require("./server/routes/postsRoutes"));
+const postsRoutes_1 = __importDefault(require("./routes/postsRoutes"));
 app.use("/api/posts", postsRoutes_1.default);
 app.use(express_1.default.static("./client/build"));
 app.use("/*", express_1.default.static("./client/build"));

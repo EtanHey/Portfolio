@@ -7,12 +7,11 @@ export const login = async (req, res) => {
         const { email, password } = req.body;
         const isAUser = await User.findOne({ email }).collation({
             locale: 'en_US',
-            strength: 2,
+            strength: 2
         });
 
         if (!isAUser)
             throw new Error('this user does not exist, create an account');
-        console.log(isAUser);
         const verified = isAUser.password === password;
         if (!verified) throw new Error('this is the wrong password');
         const userPublicInfo = {
@@ -21,7 +20,7 @@ export const login = async (req, res) => {
             email: isAUser.email,
             position: isAUser.position,
             workSpace: isAUser.workSpace,
-            id: isAUser._id,
+            id: isAUser._id
         };
         const encodedInformation = jwt.encode(userPublicInfo, secret);
         res.cookie('userInformation', encodedInformation);
@@ -42,13 +41,13 @@ export async function create(req, res) {
             firstName,
             lastName,
             position,
-            workSpace,
+            workSpace
         };
         if (!newUserInformation)
             throw new Error('no newUser in create - userCont');
         const isAUser = await User.findOne({ email }).collation({
             locale: 'en_US',
-            strength: 2,
+            strength: 2
         });
         if (isAUser) throw new Error(`a user under ${email} already exists`);
         const newUser = new User(newUserInformation);
@@ -59,7 +58,7 @@ export async function create(req, res) {
             lastName,
             position,
             workSpace,
-            id: userInformation._id,
+            id: userInformation._id
         };
         const encodedInformation = jwt.encode(newUserPublicInfo, secret);
         res.cookie('userInformation', encodedInformation);
@@ -77,7 +76,7 @@ export async function getUsers(req, res) {
             const userList = await User.find({}, { password: 0 });
             if (!userList)
                 throw new Error(
-                    "did'nt find the user list in getUsers -userCont",
+                    "did'nt find the user list in getUsers -userCont"
                 );
             res.send({ ok: true, userList: userList });
         }

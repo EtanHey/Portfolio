@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.searchPosts = exports.createNewPost = exports.getOthersPostsList = exports.getPostsList = void 0;
+exports.deletePost = exports.searchPosts = exports.createNewPost = exports.getOthersPostsList = exports.getPostsList = void 0;
 const postModel_1 = __importDefault(require("../model/postModel"));
 const jwt_simple_1 = __importDefault(require("jwt-simple"));
 const secret = process.env.JWT_SECRET;
@@ -108,4 +108,19 @@ const searchPosts = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.searchPosts = searchPosts;
+const deletePost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const postId = req.body._id;
+        const { deletedCount } = yield postModel_1.default.deleteOne({ _id: postId });
+        if (deletedCount === 1) {
+            res.send({ ok: true });
+            return;
+        }
+    }
+    catch (error) {
+        console.log(error);
+        res.send({ error: error.message });
+    }
+});
+exports.deletePost = deletePost;
 //# sourceMappingURL=postCont.js.map

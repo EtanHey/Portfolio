@@ -29,7 +29,6 @@ function Login(props: LoginProps) {
 
                 <form
                     onSubmit={(event) => {
-                        console.log(event);
                         handleCreate(event);
                     }}
                     className='form-register'>

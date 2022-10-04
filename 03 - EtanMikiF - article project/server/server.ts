@@ -29,8 +29,6 @@ import articleRouter from './router/articleRouter';
 app.use('/api/users', userRouter);
 app.use('/api/articles', articleRouter);
 
-console.log(process.env.ENV);
-
 
 app.listen(port, () => {
   return console.log(`Express is listening at http://localhost:${port}`);
